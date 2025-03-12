@@ -64,7 +64,7 @@ export default function Profile() {
           </label>
           <label>
             Email:
-            <input type="email" name="email" value={profile.email} disabled className="input-field" />
+            <input type="email" name="email" value={profile.email} onChange={handleInputChange} className="input-field" />
           </label>
           <button onClick={handleSaveProfile} className="save-btn">Save Profile</button>
           <button onClick={handleLogout} className="logout-btn">Logout</button>

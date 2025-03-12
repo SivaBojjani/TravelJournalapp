@@ -2,10 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f4c98d;
+  background: #00a6fb; /* Original color */
   padding: 15px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+
 
 .logo-container .logo {
   width: 50px;
@@ -19,11 +21,11 @@
 .nav-btn {
   padding: 8px 15px;
   border-radius: 5px;
-  background-color: #02231da6;
+  background-color: #051923;
   color: white;
   cursor: pointer;
 }
 
 .nav-btn:hover {
-  background-color: #0056b3;
+  background-color: #f4cca7;
 }

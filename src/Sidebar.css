@@ -1,70 +1,62 @@
-/* Sidebar styles */
-.sidenav {
-    height: 100%;
-    width: 0; /* Initially hidden */
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: width 0.3s ease-in-out;
-    padding-top: 60px;
-  }
-  
-  .sidenav.open {
-    width: 250px; /* Sidebar stays open */
-  }
-  
-  .sidenav a {
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 18px;
-    color: white;
-    display: block;
-    transition: background 0.2s;
-  }
-  
-  .sidenav a:hover {
-    background-color: #575757;
-  }
-  
-  .closebtn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 25px;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Prevent main content from shifting */
-  #main {
-    padding: 20px;
-    margin-left: 0; /* No shifting */
-    transition: margin-left 0.3s ease-in-out;
-  }
-  
-  #main.shifted {
-    margin-left: 250px; /* Keep space for sidebar */
-  }
-  
-  /* Menu button stays fixed */
-  .menu-btn {
-    font-size: 20px;
-    background-color: #a67c52;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-  }
-  
-  .menu-btn:hover {
-    background-color: #8b5e3c;
-  }
-  
+/* Full-Screen Sidebar Overlay */
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index: 1000;
+}
+
+.overlay.open {
+  width: 100%; /* Full-screen width */
+}
+
+.overlay-content {
+  position: relative;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.overlay-content a {
+  padding: 15px;
+  display: block;
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.overlay-content a:hover {
+  color: #f1f1f1;
+}
+
+/* Close Button */
+.closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 50px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Menu Button */
+.dashboard-menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}

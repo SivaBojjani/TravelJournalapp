@@ -8,38 +8,15 @@
 .card {
   padding: 20px;
   border-radius: 10px;
-  background: #8ee0f9;
+  background: #0582ca; /* Original color */
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
+  color: #000000; /* Original color */
 }
 
-.card h3 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin-bottom: 15px;
-}
-
-.btn {
-  padding: 10px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.create-btn {
-  background: #d8bd53;
-}
-
-.view-btn {
-  background: #0b9f10;
-  color: white;
-}
-
-.explore-btn {
-  background: #007BFF;
-  color: white;
+.dashboard-menu-btn {
+  position: fixed;
+  top: 20px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  z-index: 1000;
 }

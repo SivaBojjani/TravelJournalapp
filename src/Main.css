@@ -1,15 +1,19 @@
 .main-content {
   padding: 100px 20px;
   text-align: center;
-  background: #f8f1e5;
+  background: #f8f1e5; /* Original color */
 }
+
+
 
 .section-title {
   font-size: 2rem;
   margin-bottom: 10px;
 }
 
+
+
 .description {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  color: #333; /* Original color */
 }

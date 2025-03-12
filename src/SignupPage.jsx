@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-export default function SignupPage({ switchToLogin }) {
+export default function SignupPage({ switchToLogin, closeModal }) {
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -21,7 +22,8 @@ export default function SignupPage({ switchToLogin }) {
     if (username && email && password && country) {
       localStorage.setItem("user", JSON.stringify({ username, email, password, country }));
       setMessage("Signup successful! Redirecting to login...");
-      setTimeout(() => switchToLogin(), 1500);
+      setTimeout(() => window.location.href = '/dashboard', 1500); // Redirect to dashboard
+
     } else {
       setMessage("Please fill in all the fields.");
     }
@@ -46,7 +48,9 @@ export default function SignupPage({ switchToLogin }) {
         <button className="btn signup-btn" type="submit">Sign Up</button>
       </form>
 
+      <button className="btn close-btn" onClick={closeModal}>Close</button>
       <p className="switch-link" onClick={switchToLogin}>
+
         Already have an account? <span>Login</span>
       </p>
     </div>

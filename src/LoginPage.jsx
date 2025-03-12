@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-export default function LoginPage({ switchToSignup }) {
+export default function LoginPage({ switchToSignup, closeModal }) {
+
   const [message, setMessage] = useState("");
 
   const handleLogin = () => {
@@ -26,7 +27,9 @@ export default function LoginPage({ switchToSignup }) {
 
       <button className="btn login-btn" onClick={handleLogin}>Login</button>
 
+      <button className="btn close-btn" onClick={closeModal}>Close</button>
       <p className="switch-link" onClick={switchToSignup}>
+
         Don't have an account? <span>Sign Up</span>
       </p>
     </div>

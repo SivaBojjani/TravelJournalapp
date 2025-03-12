@@ -11,14 +11,10 @@ export default function Header({ isLoggedIn, handleLogout, setShowLogin, setShow
         </div>
         {isLoggedIn && (
           <nav className="nav-buttons">
-            <Link to="/">
-              <button className="nav-btn">Home</button>
-            </Link>
+            <Link to="/"><button className="nav-btn">Home</button></Link>
             <button className="nav-btn">Maps</button>
             <button className="nav-btn">What's New!</button>
-            <Link to="/profile">
-              <button className="nav-btn">Profile</button>
-            </Link>
+            <Link to="/profile"><button className="nav-btn">Profile</button></Link>
           </nav>
         )}
       </div>
