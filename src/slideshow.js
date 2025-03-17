@@ -1,33 +1,38 @@
-function showSlides(n, slideIndex) {
+function showSlides(n) {
   const slides = document.getElementsByClassName("mySlides");
   const dots = document.getElementsByClassName("dot");
 
+  // Check if slides exist
   if (!slides || slides.length === 0) {
-    console.error("No slides found");
+    console.error("Slides not found.");
     return;
   }
 
-  // Wrap around the slide index if it goes out of bounds
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  if (n < 1) {
-    slideIndex = slides.length;
+  // Check if dots exist
+  if (!dots || dots.length === 0) {
+    console.error("Dots not found.");
+    return;
   }
 
-  // Hide all slides
+  // Wrap around the slide index
+  if (n > slides.length) {
+    n = 1;
+  }
+  if (n < 1) {
+    n = slides.length;
+  }
+
+  // Hide all slides and remove 'active' class from all dots
   for (let i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-
-  // Remove 'active' class from all dots
   for (let i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
 
-  // Display the current slide and set the corresponding dot as active
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " active";
+  // Show the current slide and set the corresponding dot as active
+  slides[n - 1].style.display = "block";
+  dots[n - 1].className += " active";
 }
 
 export { showSlides };
