@@ -3,9 +3,9 @@
   text-align: center;
   padding: 10px 20px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Change to fixed for sticky behavior */
-  bottom: 0; /* Pin it to the bottom of the viewport */
-  left: 0; /* Ensure it starts from the left edge */
-  width: 100%; /* Ensure it spans the full width */
-  z-index: 1000; /* Keep it above other elements if overlapping occurs */
+  position: relative; /* Ensure it stays in the flow of the document */
+  bottom: 0; /* Remove pinning */
+  left: 0; /* Remove fixed positioning */
+  width: 100%; /* Full width */
+  z-index: 1; /* Keep layering, but not needed unless overlapping occurs */
 }
