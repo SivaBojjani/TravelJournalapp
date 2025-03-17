@@ -5,12 +5,18 @@
   background: #00a6fb; /* Original color */
   padding: 15px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: padding 0.3s ease; /* Smooth transition for padding */
+}
+
+.header.shrink {
+  padding: 10px 20px; /* Reduced padding when shrunk */
 }
 
 
 
+
 .logo-container .logo {
-  width: 50px;
+  width: 70px;
 }
 
 .nav-buttons {

@@ -3,6 +3,9 @@
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
+  max-height: calc(100vh - 100px); /* Adjust for any header/footer height */
+  overflow-y: auto; /* Add vertical scrolling */
+  padding: 20px; /* Optional: Add padding for spacing */
 }
 
 .card {
@@ -14,9 +17,14 @@
   color: #000000; /* Original color */
 }
 
-.dashboard-menu-btn {
-  position: fixed;
-  top: 20px; /* Adjust as needed */
-  left: 20px; /* Adjust as needed */
-  z-index: 1000;
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the container takes at least the full height of the viewport */
+  overflow-y: auto; /* Allow scrolling in case the content exceeds the viewport height */
+}
+
+#dashboard-main {
+  flex: 1; /* Allow the main content to grow and take available space */
+  overflow-y: auto; /* Ensure the main area scrolls when content exceeds viewport */
 }

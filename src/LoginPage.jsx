@@ -1,37 +1,46 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { Link } from "react-router-dom"; // Import Link for navigation
+import './LoginSignup.css'; // Importing the CSS for styling
 
-export default function LoginPage({ switchToSignup, closeModal }) {
+export default function LoginPage({ closeModal, setIsLoggedIn }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Define navigate using useNavigate
 
-  const [message, setMessage] = useState("");
-
-  const handleLogin = () => {
-    const loginUsername = document.getElementById("login-username").value;
-    const loginPassword = document.getElementById("login-password").value;
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-
-    if (storedUser && loginUsername === storedUser.username && loginPassword === storedUser.password) {
-      localStorage.setItem("loggedInUser", JSON.stringify(storedUser));
-      window.location.reload(); // Refresh to reflect login
-    } else {
-      setMessage("Invalid username or password. Please try again.");
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle login logic here
+    setIsLoggedIn(true);
+    navigate("/dashboard"); // Redirect to dashboard after login
   };
 
   return (
-    <div className="auth-container">
+    <div className="container">
       <h2>Login</h2>
-      {message && <p className="message error">{message}</p>}
-
-      <input id="login-username" type="text" placeholder="Enter your username" />
-      <input id="login-password" type="password" placeholder="Enter your password" />
-
-      <button className="btn login-btn" onClick={handleLogin}>Login</button>
-
-      <button className="btn close-btn" onClick={closeModal}>Close</button>
-      <p className="switch-link" onClick={switchToSignup}>
-
-        Don't have an account? <span>Sign Up</span>
-      </p>
+      <form onSubmit={handleSubmit} className="clearfix">
+        <label htmlFor="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)} 
+          required 
+        />
+        <label htmlFor="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          value={password} 
+          onChange={(e) => setPassword(e.target.value)} 
+          required 
+        />
+        <button type="submit">Login</button>
+        <button type="button" className="cancelbtn" onClick={closeModal}>Cancel</button>
+      </form>
+      <p>Don't have an account? <Link to="/signup">Sign up here</Link></p> {/* Link to Signup */}
     </div>
   );
 }
