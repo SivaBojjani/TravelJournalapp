@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import TravelImage from "./assets/Travel1.png"; // Import the travel image
 import { showSlides } from "./slideshow"; // Import the slideshow function
-import Footer from "./Footer";
 import Profile from "./Profile";
 import "./Dashboard.css";
 import "./Sidebar.css"; // Sidebar styles
@@ -40,7 +39,7 @@ export default function Dashboard({ isProfileVisible, setIsProfileVisible }) {
     {
       title: "Manage Your Travel Entries",
       description: "View your travel entries and manage your profile.",
-      buttonText: "Go to Login",
+      buttonText: "Edit Entries",
     },
     {
       title: "New Journal Entry",

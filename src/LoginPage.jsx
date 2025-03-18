@@ -10,7 +10,14 @@ export default function LoginPage({ closeModal, setIsLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
+    const storedUser = JSON.parse(localStorage.getItem("loggedInUser")); // Retrieve stored user details
+    if (storedUser && storedUser.password === password) { // Check if password matches
+        setIsLoggedIn(true);
+        navigate("/dashboard"); // Redirect to dashboard after login
+    } else {
+        alert("Incorrect password. Please try again."); // Alert for incorrect password
+    }
+
     setIsLoggedIn(true);
     navigate("/dashboard"); // Redirect to dashboard after login
   };

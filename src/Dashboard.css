@@ -6,6 +6,7 @@
 }
 
 #dashboard-main {
+  background-color: floralwhite;
   flex: 1;
   padding: 20px;
   overflow-y: auto;
