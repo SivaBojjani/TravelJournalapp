@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #eddfa8; /* Original color */
+  background: #67AFCB; /* Original color */
   padding: 15px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: padding 0.3s ease; /* Smooth transition for padding */
@@ -12,8 +12,13 @@
   padding: 10px 20px; /* Reduced padding when shrunk */
 }
 
+.title {
+  color: white; /* Set title color to white */
+}
 
-
+.subtitle {
+  color: white; /* Set subtitle color to white */
+}
 
 .logo-container .logo {
   width: 70px;

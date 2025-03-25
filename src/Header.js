@@ -33,7 +33,7 @@ export default function Header({ isLoggedIn, handleLogout }) {
         )}
       </div>
       <div className="center-section">
-        <h1 className="title" >Travel Journal</h1>
+        <h1 className="title">Travel Journal</h1>
         <p className="subtitle">Travel. Document. Relive.</p>
       </div>
       <div className="right-section">

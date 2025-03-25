@@ -1,5 +1,5 @@
 .footer {
-  background: #eddfa8; /* Original color */
+  background: #092834; /* Original color */
   text-align: center;
   padding: 10px 20px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -8,4 +8,12 @@
   left: 0; /* Remove fixed positioning */
   width: 100%; /* Full width */
   z-index: 1; /* Keep layering, but not needed unless overlapping occurs */
+}
+
+.footer p {
+  color: white; /* Set footer text color to white */
+}
+
+.footer a {
+  color: inherit; /* Ensure links inherit the color (default) */
 }

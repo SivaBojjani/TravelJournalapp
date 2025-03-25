@@ -3,12 +3,10 @@
   position: sticky; /* Make the navbar sticky */
   top: 20px; /* Adjust this value for shrinking effect */
   width: 100%;
-  background-color: #555;
+  background-color:#314b5e;
   overflow: auto;
   transition: all 0.3s; /* Smooth transition for shrinking */
 }
-
-
 
 
 /* Navbar links */
@@ -23,7 +21,7 @@
 
 /* Navbar links on mouse-over */
 .navbar a:hover {
-  background-color: #000;
+  background-color: #807f7f;
 }
 
 /* Current/active navbar link */
