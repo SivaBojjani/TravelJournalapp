@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-
-
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 export default function Header({ isLoggedIn, handleLogout }) {
@@ -25,7 +24,9 @@ export default function Header({ isLoggedIn, handleLogout }) {
     <header className={`header ${isShrunk ? "shrink" : ""}`}>
       <div className="left-section">
         <div className="logo-container">
-          <img src="/travel.png" alt="Travel Journal Logo" className="logo" />
+          <Link to="/">
+            <img src="/travel.png" alt="Travel Journal Logo" className="logo" />
+          </Link>
         </div>
         {isLoggedIn && (
             <nav className="nav-buttons">

@@ -1,25 +1,25 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaHome, FaSearch, FaCog, FaInfoCircle, FaMap, FaUser } from "react-icons/fa";
+import { FaHome, FaSearch, FaMap, FaUser, FaStar, FaBook } from "react-icons/fa";
 import "./Navbar.css";
 
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <NavLink to="Homepage.jsx" className="nav-link">
+      <NavLink to="/dashboard" className="nav-link" end> {/* Redirects to dashboard */}
         <FaHome /> Home
       </NavLink>
       <NavLink to="/search" className="nav-link">
         <FaSearch /> Search
       </NavLink>
-      <NavLink to="/settings" className="nav-link">
-        <FaCog /> Settings
-      </NavLink>
-      <NavLink to="/about" className="nav-link">
-        <FaInfoCircle /> About
+      <NavLink to="/features" className="nav-link">
+        <FaStar /> Features
       </NavLink>
       <NavLink to="/maps" className="nav-link">
         <FaMap /> Maps
+      </NavLink>
+      <NavLink to="/journal" className="nav-link">
+        <FaBook /> Journal
       </NavLink>
       <NavLink to="/profile" className="nav-link">
         <FaUser /> Profile

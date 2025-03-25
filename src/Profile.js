@@ -70,15 +70,24 @@ export default function Profile() {
       navigate("/dashboard"); // Redirect to dashboard
     }
   };
-  
 
+  // JSX (moved to the bottom after all functions are defined)
   return (
     <div className="profile">
       <h2>My Profile</h2>
       {message && <p className="success-message">{message}</p>}
       <div className="profile-info">
         <img src={profile.profilePicture} alt="Profile" className="profile-picture" />
-        <input type="file" accept="image/*" onChange={handleImageUpload} className="file-input" />
+        <label htmlFor="file-upload" className="upload-label">
+          Upload Photo
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          className="file-input"
+        />
         <div className="profile-details">
           <label>
             Username:
@@ -113,7 +122,6 @@ export default function Profile() {
           <label>
             Bio:
             <textarea
-              type="text"
               name="bio"
               value={profile.bio}
               onChange={handleInputChange}
@@ -121,9 +129,17 @@ export default function Profile() {
               placeholder="Tell us about yourself..."
             />
           </label>
-          <button onClick={handleSaveProfile} className="save-btn">Save Profile</button>
-          <button onClick={handleLogout} className="logout-btn">Logout</button>
-          <button onClick={handleDeleteProfile} className="delete-btn">Delete Profile</button>
+        </div>
+        <div className="button-group">
+          <button onClick={handleSaveProfile} className="save-btn">
+            Save Profile
+          </button>
+          <button onClick={handleLogout} className="logout-btn">
+            Logout
+          </button>
+          <button onClick={handleDeleteProfile} className="delete-btn">
+            Delete Profile
+          </button>
         </div>
       </div>
     </div>
