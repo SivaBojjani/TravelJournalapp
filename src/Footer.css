@@ -1,19 +1,80 @@
 .footer {
-  background: #092834; /* Original color */
+  background: #092834;
   text-align: center;
-  padding: 10px 20px;
+  padding: 15px 20px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  position: relative; /* Ensure it stays in the flow of the document */
-  bottom: 0; /* Remove pinning */
-  left: 0; /* Remove fixed positioning */
-  width: 100%; /* Full width */
-  z-index: 1; /* Keep layering, but not needed unless overlapping occurs */
+  width: 100%;
+  z-index: 1;
+  color: white;
 }
 
-.footer p {
-  color: white; /* Set footer text color to white */
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
-.footer a {
-  color: inherit; /* Ensure links inherit the color (default) */
+.footer-links {
+  font-size: 14px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer-links a:hover {
+  color: #1da1f2;
+}
+
+.contact-form-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.contact-form-btn:hover {
+  text-decoration: underline;
+}
+
+.newsletter {
+  margin-top: 10px;
+}
+
+.newsletter p {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.newsletter input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.newsletter button {
+  padding: 8px 12px;
+  background: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.newsletter button:hover {
+  background: #0c7abf;
+}
+
+.copyright {
+  font-size: 12px;
+  margin-top: 10px;
 }
