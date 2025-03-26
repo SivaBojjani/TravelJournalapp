@@ -74,14 +74,16 @@ export default function Dashboard({ isProfileVisible, setIsProfileVisible }) {
           &times;
         </button>
         <div className="overlay-content">
-          <button onClick={() => setIsProfileVisible(true)}>Profile</button>
+          <button onClick={() => {
+            toggleSidebar();
+          }}>Donate Us</button>
           <button>About</button>
           <button>Services</button>
           <button>Clients</button>
-          <button>Contact</button>
+          <button>Legal & Safety</button>
         </div>
       </div>
-
+  
       {/* Menu Button to Open Sidebar */}
       <button className="dashboard-menu-btn" onClick={toggleSidebar}>
         ☰ Menu

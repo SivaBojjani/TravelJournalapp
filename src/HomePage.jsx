@@ -20,7 +20,7 @@ export default function HomePage() {
       title: "Dashboard",
       description: "View your travel entries and manage your profile.",
       buttonText: "Go to Dashboard",
-      redirectPath: "/dashboard",
+      redirectPath: "/login",
     },
     {
       title: "Explore Destinations",

@@ -24,7 +24,8 @@ export default function Header({ isLoggedIn, handleLogout }) {
     <header className={`header ${isShrunk ? "shrink" : ""}`}>
       <div className="left-section">
         <div className="logo-container">
-          <Link to="/">
+          <Link to="/" onClick={() => console.log('Logo clicked!')}>
+
             <img src="/travel.png" alt="Travel Journal Logo" className="logo" />
           </Link>
         </div>

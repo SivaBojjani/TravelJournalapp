@@ -1,53 +1,80 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
-import { Link } from "react-router-dom"; // Import Link for navigation
-import './LoginSignup.css'; // Importing the CSS for styling
+import { useNavigate, Link } from "react-router-dom";
+import './LoginSignup.css';
 
 export default function LoginPage({ closeModal, setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Define navigate using useNavigate
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const storedUser = JSON.parse(localStorage.getItem("loggedInUser")); // Retrieve stored user details
-    if (storedUser && storedUser.password === password) { // Check if password matches
-        setIsLoggedIn(true);
-        navigate("/dashboard"); // Redirect to dashboard after login
-    } else {
-        alert("Incorrect password. Please try again."); // Alert for incorrect password
+    setError("");
+    
+    const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    
+    if (!storedUser) {
+      setError("No account found. Please sign up first.");
+      return;
     }
 
-    setIsLoggedIn(true);
-    navigate("/dashboard"); // Redirect to dashboard after login
+    if (storedUser.username === username && storedUser.password === password) {
+      setIsLoggedIn(true);
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/dashboard");
+    } else {
+      setError("Incorrect username or password");
+    }
+  };
+
+  const handleCancel = () => {
+    navigate("/");
+    if (closeModal) closeModal();
   };
 
   return (
     <div className="container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="clearfix">
-        <label htmlFor="username">Username</label>
-        <input 
-          type="text" 
-          id="username" 
-          name="username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-          required 
-        />
-        <label htmlFor="password">Password</label>
-        <input 
-          type="password" 
-          id="password" 
-          name="password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        <button type="submit">Login</button>
-        <button type="button" className="cancelbtn" onClick={closeModal}>Cancel</button>
+      <h2>Login To Your Account</h2>
+      {error && <div className="error-message">{error}</div>}
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input 
+            type="text" 
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" 
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="button-group">
+          <button type="submit">Login</button>
+          <button 
+            type="button" 
+            className="cancelbtn" 
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
-      <p>Don't have an account? <Link to="/signup">Sign up here</Link></p> {/* Link to Signup */}
+      
+      <p className="auth-redirect">
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </p>
     </div>
   );
 }

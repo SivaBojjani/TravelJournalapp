@@ -1,70 +1,125 @@
+/* Modern Clean UI Styles */
 * {
   box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
-
-button:hover {
-  opacity: 1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
 .container {
-  padding: 16px;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* Clear floats */
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+h2 {
+  color: #2a9d8f;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-    width: 100%;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  color: #264653;
+  margin-bottom: -0.5rem;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=tel] {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #2a9d8f;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(42, 157, 143, 0.2);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 1rem 0;
+}
+
+.checkbox-container input {
+  width: auto;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button[type=submit] {
+  background: #2a9d8f;
+  color: white;
+}
+
+button[type=submit]:hover {
+  background: #21867a;
+}
+
+.cancelbtn {
+  background: #f8f9fa;
+  color: #264653;
+  border: 1px solid #ddd;
+}
+
+.cancelbtn:hover {
+  background: #e9ecef;
+}
+
+p {
+  text-align: center;
+  color: #6c757d;
+  margin-top: 1.5rem;
+}
+
+a {
+  color: #2a9d8f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
   }
 }

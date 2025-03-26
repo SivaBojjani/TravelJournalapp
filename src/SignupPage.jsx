@@ -1,109 +1,156 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
-import './LoginSignup.css'; // Importing the CSS for styling
+import { Link, useNavigate } from "react-router-dom";
+import './LoginSignup.css';
 
 export default function SignupPage({ closeModal, setIsLoggedIn }) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    mobile: "",
+    termsAccepted: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleCancel = () => {
+    navigate("/");
+    if (closeModal) closeModal();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const newUser = { username, email, password, mobile };
-    if (!termsAccepted) {
-      alert("You must accept the terms and conditions to sign up.");
+    setError("");
+    
+    if (!formData.termsAccepted) {
+      setError("You must accept the terms and conditions");
       return;
     }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("https://projectserver-1.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newUser)
+        body: JSON.stringify(formData)
       });
 
       if (response.ok) {
-        localStorage.setItem("loggedInUser", JSON.stringify(newUser)); // Save user details in local storage
-
-        alert("Signup successful! Redirecting to login...");
-        setIsLoggedIn(true);
-        closeModal();
-        navigate("/login"); // Redirect to login page
+        localStorage.setItem("loggedInUser", JSON.stringify(formData));
+        alert("Signup successful! Please log in.");
+        navigate("/login"); // Changed to redirect to login page
+        if (closeModal) closeModal();
       } else {
-        alert("Signup failed. Please try again.");
+        const errorData = await response.json();
+        setError(errorData.message || "Signup failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error during signup:", error);
-      alert("Error connecting to server. Please try again later.");
+      console.error("Signup error:", error);
+      setError("Error connecting to server. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="clearfix">
-        <p>
-          Already have an account? <Link to="/login">Login here</Link>
-        </p>
+      <h2>Create Your Account</h2>
+      {error && <div className="error-message">{error}</div>}
+      
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input 
+            type="text" 
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label htmlFor="username">Username</label>
-        <input 
-          type="text" 
-          id="username" 
-          name="username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-          required 
-        />
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input 
+            type="email" 
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <input 
-          type="text" 
-          id="email" 
-          name="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
+        <div className="form-group">
+          <label htmlFor="mobile">Mobile Number</label>
+          <input 
+            type="tel" 
+            id="mobile"
+            name="mobile"
+            value={formData.mobile}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <label htmlFor="mobile">Mobile Number</label>
-        <input 
-          type="text" 
-          id="mobile" 
-          name="mobile" 
-          value={mobile} 
-          onChange={(e) => setMobile(e.target.value)} 
-          required 
-        />
-        
-        <label htmlFor="password">Password</label>
-        <input 
-          type="password" 
-          id="password" 
-          name="password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        
-        <label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" 
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="checkbox-group">
           <input 
             type="checkbox" 
-            checked={termsAccepted} 
-            onChange={(e) => setTermsAccepted(e.target.checked)} 
-            required 
+            id="terms"
+            name="termsAccepted"
+            checked={formData.termsAccepted}
+            onChange={handleChange}
+            required
           />
-          I agree to the terms of service and privacy policy.
-        </label>
+          <label htmlFor="terms">
+            I agree to the <Link to="/terms">Terms of Service</Link> and <Link to="/privacy">Privacy Policy</Link>
+          </label>
+        </div>
 
-        <button type="submit">Sign Up</button>
-        <button type="button" className="cancelbtn" onClick={closeModal}>Cancel</button>
+        <div className="button-group">
+          <button 
+            type="submit" 
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating Account..." : "Sign Up"}
+          </button>
+          <button 
+            type="button" 
+            className="cancelbtn"
+            onClick={handleCancel}
+            disabled={isSubmitting}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
+
+      <p className="auth-redirect">
+        Already have an account? <Link to="/login">Log in</Link>
+      </p>
     </div>
   );
 }
