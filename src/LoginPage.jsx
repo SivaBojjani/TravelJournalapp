@@ -5,26 +5,39 @@ import './LoginSignup.css';
 export default function LoginPage({ closeModal, setIsLoggedIn }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
-    const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    
-    if (!storedUser) {
-      setError("No account found. Please sign up first.");
-      return;
-    }
+    setIsLoading(true);
 
-    if (storedUser.username === username && storedUser.password === password) {
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+      
+      if (!storedUser) {
+        setError("No account found. Please sign up first.");
+        return;
+      }
+
+      if (storedUser.username !== username) {
+        setError("Username not found");
+        return;
+      }
+
+      if (storedUser.password !== password) {
+        setError("Incorrect password");
+        return;
+      }
+
       setIsLoggedIn(true);
       localStorage.setItem("isLoggedIn", "true");
       navigate("/dashboard");
-    } else {
-      setError("Incorrect username or password");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -37,6 +50,7 @@ export default function LoginPage({ closeModal, setIsLoggedIn }) {
     <div className="container">
       <h2>Login To Your Account</h2>
       {error && <div className="error-message">{error}</div>}
+      
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -49,23 +63,38 @@ export default function LoginPage({ closeModal, setIsLoggedIn }) {
           />
         </div>
         
-        <div className="form-group">
+        <div className="form-group password-field">
           <label htmlFor="password">Password</label>
           <input 
-            type="password" 
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <button 
+            type="button" 
+            className="toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+            tabIndex="-1"
+          >
+            {showPassword ? "👁️" : "👁️‍🗨️"}
+          </button>
         </div>
 
         <div className="button-group">
-          <button type="submit">Login</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <span className="spinner"></span> Logging in...
+              </>
+            ) : "Login"}
+          </button>
           <button 
             type="button" 
-            className="cancelbtn" 
+            className="cancelbtn"
             onClick={handleCancel}
+            disabled={isLoading}
           >
             Cancel
           </button>

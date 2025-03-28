@@ -10,8 +10,10 @@ export default function SignupPage({ closeModal, setIsLoggedIn }) {
     mobile: "",
     termsAccepted: false
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,15 +32,14 @@ export default function SignupPage({ closeModal, setIsLoggedIn }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
-    if (!formData.termsAccepted) {
-      setError("You must accept the terms and conditions");
-      return;
-    }
-
-    setIsSubmitting(true);
+    setIsLoading(true);
 
     try {
+      if (!formData.termsAccepted) {
+        setError("You must accept the terms and conditions");
+        return;
+      }
+
       const response = await fetch("https://projectserver-1.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,18 +48,19 @@ export default function SignupPage({ closeModal, setIsLoggedIn }) {
 
       if (response.ok) {
         localStorage.setItem("loggedInUser", JSON.stringify(formData));
-        alert("Signup successful! Please log in.");
-        navigate("/login"); // Changed to redirect to login page
-        if (closeModal) closeModal();
+        setSuccessMessage("Account created successfully! Redirecting to login...");
+        setTimeout(() => {
+          navigate("/login");
+          if (closeModal) closeModal();
+        }, 2000);
       } else {
         const errorData = await response.json();
         setError(errorData.message || "Signup failed. Please try again.");
       }
     } catch (error) {
-      console.error("Signup error:", error);
       setError("Error connecting to server. Please try again later.");
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -66,6 +68,7 @@ export default function SignupPage({ closeModal, setIsLoggedIn }) {
     <div className="container">
       <h2>Create Your Account</h2>
       {error && <div className="error-message">{error}</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -104,16 +107,24 @@ export default function SignupPage({ closeModal, setIsLoggedIn }) {
           />
         </div>
 
-        <div className="form-group">
+        <div className="form-group password-field">
           <label htmlFor="password">Password</label>
           <input 
-            type="password" 
+            type={showPassword ? "text" : "password"}
             id="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             required
           />
+          <button 
+            type="button" 
+            className="toggle-password"
+            onClick={() => setShowPassword(!showPassword)}
+            tabIndex="-1"
+          >
+            {showPassword ? "👁️" : "👁️‍🗨️"}
+          </button>
         </div>
 
         <div className="checkbox-group">
@@ -131,17 +142,18 @@ export default function SignupPage({ closeModal, setIsLoggedIn }) {
         </div>
 
         <div className="button-group">
-          <button 
-            type="submit" 
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Creating Account..." : "Sign Up"}
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <span className="spinner"></span> Creating Account...
+              </>
+            ) : "Sign Up"}
           </button>
           <button 
             type="button" 
             className="cancelbtn"
             onClick={handleCancel}
-            disabled={isSubmitting}
+            disabled={isLoading}
           >
             Cancel
           </button>
